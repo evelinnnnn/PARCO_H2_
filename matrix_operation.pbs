@@ -1,0 +1,31 @@
+#!/bin/bash
+# Job name
+#PBS -N test
+#PBS -o ./Cjob.o
+#PBS -e ./Cjob.e
+# Queue name
+#PBS -q short_cpuQ
+# Set the maximum wall time
+#PBS -l walltime=0:10:00
+# Number of nodes, cpus, mpi processors and amount of memory
+#PBS -l select=1:ncpus=64:ompthreads=64:mem=1mb
+
+# Modules for C
+module load gcc91
+gcc() {
+    gcc-9.1.0 "$@"
+}
+gcc --version
+
+# Select the working directory
+cd /home/evelin.begher/H2
+
+#The code should be compiled before submitting the job
+gcc -o exeC H2.c -fopenmp
+
+#run code
+for n in 16 32 64 128 256 512 1024 2048 4096; do
+
+  ./exeC $n 
+
+done
