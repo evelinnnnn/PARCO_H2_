@@ -1,31 +1,36 @@
 #!/bin/bash
 # Job name
-#PBS -N test
-#PBS -o ./Cjob.o
-#PBS -e ./Cjob.e
+#PBS -N name
+# Output files
+#PBS -o ./name.o
+#PBS -e ./name.e
 # Queue name
 #PBS -q short_cpuQ
 # Set the maximum wall time
 #PBS -l walltime=0:10:00
 # Number of nodes, cpus, mpi processors and amount of memory
-#PBS -l select=1:ncpus=64:ompthreads=64:mem=1mb
+#PBS -l select=1:ncpus=64:mpiprocs=64:mem=1mb
 
-# Modules for C
+# Modules for python and MPI
 module load gcc91
+module load mpich-3.2.1--gcc-9.1.0
+
 gcc() {
     gcc-9.1.0 "$@"
 }
 gcc --version
 
-# Select the working directory
-cd /home/evelin.begher/H2
+# Select the working directory 
+cd /home/evelin.begher/H2 
 
-#The code should be compiled before submitting the job
-gcc -o exeC H2.c -fopenmp
+# the code should be previously compiled
+mpicc H22.c -o code.out
+ 
 
-#run code
-for n in 16 32 64 128 256 512 1024 2048 4096; do
-
-  ./exeC $n 
-
+# Run the code
+for n in 16 32 64 128 256 512 1024 2048 4096; do 
+  for process in 1 2 4 16 32 64; do 
+    echo "process: $process  - dim mat: $n"
+    mpirun -np $process ./code.out $n
+  done
 done
