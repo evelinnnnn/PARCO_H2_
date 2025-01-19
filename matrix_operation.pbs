@@ -28,9 +28,5 @@ mpicc matrix_operation.c -o code.out
  
 
 # Run the code
-for n in 16 32 64 128 256 512 1024 2048 4096; do 
-  for process in 1 2 4 16 32 64; do 
-    echo "process: $process  - dim mat: $n"
-    mpirun -np $process ./code.out $n
-  done
-done
+mpirun -np 4 ./code.out 2048
+
