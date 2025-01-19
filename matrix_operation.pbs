@@ -24,7 +24,7 @@ gcc --version
 cd /home/evelin.begher/H2 
 
 # the code should be previously compiled
-mpicc H22.c -o code.out
+mpicc matrix_operation.c -o code.out
  
 
 # Run the code
