@@ -7,8 +7,8 @@ I can compile my code in another way by directly using the processor and executi
 $ module load gcc91<br>
 $ module load mpich-3.2.1--gcc-9.1.0<br>
 $ mpicc -o test matrix_transpose.c<br>
-$ mpirun -np ***k*** ./test ***n***<br>
-where ***n*** represents the matrix dimension (from $$2^4$$ to $$2^{12}$$)<br>
+$ mpirun -np ***k*** ./test ***n***<br>  
+where ***n*** represents the matrix dimension (from $$2^4$$ to $$2^{12}$$) and ***k*** the processes using for MPI(2, 4, 16, 32, 64)<br>
 This procedure takes more time, especially when changing the matrix dimensions for various configurations. <br>
 <br>
 
