@@ -4,10 +4,10 @@
 I wrote the code in C, and to simplify the execution process, I created a [PBS script](matrix_operation.pbs) that allows me to run the instructions in a single step.<br>
 <br>
 I can compile my code in another way by directly using the processor and executing the following command: <br>
-$ module load gcc91
-$ module load mpich-3.2.1--gcc-9.1.0
-$ mpicc -o test matrix_transpose.c
-$ mpirun -np ***k*** ./test ***n***
+$ module load gcc91<br>
+$ module load mpich-3.2.1--gcc-9.1.0<br>
+$ mpicc -o test matrix_transpose.c<br>
+$ mpirun -np ***k*** ./test ***n***<br>
 where ***n*** represents the matrix dimension (from $$2^4$$ to $$2^{12}$$)<br>
 This procedure takes more time, especially when changing the matrix dimensions for various configurations. <br>
 <br>
